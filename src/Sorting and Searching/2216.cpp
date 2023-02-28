@@ -13,11 +13,21 @@ int32_t main() {
     }
 
     int answer = 0;
-    for (int i = 1; i < n; i++) {
-        while (indexOf[i+1] > indexOf[i]) {
+    int i = 1;
+    vector<unordered_set<int>> chunks;
+    while (i <= n) {
+        unordered_set<int> chunk;
+        chunk.insert(i);
+        while (indexOf[i+1] > indexOf[i] && i <= n-1) {
             i++;
+            chunk.insert(i);
         }
+        chunks.push_back(chunk);
         answer++;
+        if (i == n) {
+            break;
+        }
+        i++;
     }
-    cout << ((answer == 1) ? (1) : (answer + 1)) << "\n";
+    cout << answer << "\n";
 }
